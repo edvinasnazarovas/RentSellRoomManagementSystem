@@ -1,0 +1,61 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Users")
+    body
+        header
+            include ../common/navbar.pug
+            +navbar(user)
+            .container
+                .row.align-items-center 
+                    .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                        h1 Users
+                        table.table
+                            thead
+                            tr
+                                th(scope="col") Email
+                                th(scope="col") First Name
+                                th(scope="col") Last Name
+                                th(scope="col") Phone Number
+                                th(scope="col") Country
+                                th(scope="col") City
+                                th(scope="col") Address
+                                th(scope="col") Preferred pay method
+                                th(scope="col") Role
+                                th(scope="col") Created At
+                                th(scope="col") Last Updated At
+                                th(scope="col") Edit 
+                                th(scope="col") Delete
+                            tr
+                            tbody
+                                tr(id=user.id)
+                                td
+                                    span #{user.email}
+                                td 
+                                    span #{user.first_name}
+                                td 
+                                    span #{user.last_name}
+                                td 
+                                    span #{user.phone_number}
+                                td 
+                                    span #{user.country}
+                                td 
+                                    span #{user.city}
+                                td 
+                                    span #{user.address}
+                                td
+                                    span #{user.preferred_pay_method}
+                                td 
+                                    span #{user.RoleID}
+                                td 
+                                    span #{user.createdAt}
+                                td 
+                                    span #{user.updatedAt}
+                                td
+                                    a(href="/user/" + user.id + "/edit") Edit
+                                td
+                                    form(action="/user/" + user.id + "/delete", method="POST")
+                                    button(type="submit").btn.btn-primary Delete
+        include ../common/footer.pug
+        +footer()
+        script(src='/javascripts/users.js')

@@ -1,0 +1,65 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Room")
+    body
+        header
+            include ../common/navbar.pug
+            +navbar(user)
+            .container
+                .row.align-items-center 
+                    .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                        h1 Rooms
+                        table.table
+                            thead
+                            tr
+                                th(scope="col") Type
+                                th(scope="col") Location
+                                th(scope="col") Size
+                                th(scope="col") Location
+                                th(scope="col") Amenities
+                                th(scope="col") Price
+                                th(scope="col") Payment Frequency
+                                th(scope="col") Created At
+                                th(scope="col") Last Updated At
+                                th(scope="col") Owner
+                                if user && user.id === room.UserId || user && user.RoleID === 1
+                                    th(scope="col") Delete
+                                th(scope="col") Purchase
+                            tr
+                            tbody
+                              tr(id=room.id)
+                                td 
+                                    span(data-label="type") #{room.type}
+                                td
+                                    span(data-label="location")
+                                        | #{room.country}, #{room.city}, #{room.address}, Floor #{room.floor_number}, Room #{room.door_number}
+                                td
+                                    span(data-label="size") #{room.size} m²
+                                td
+                                    span(data-label="amenities")
+                                        each amenity in room.amenities
+                                            p #{amenity.name}
+                                td 
+                                    span(data-label="description") #{room.description}
+                                td 
+                                    span(data-label="price") #{room.Price.price}
+                                td 
+                                    span(data-label="price-freq") #{room.Price.frequency}
+
+                                td 
+                                    span(data-label="createdAt") #{room.createdAt}
+                                td 
+                                    span(data-label="updatedAt") #{room.updatedAt}
+                                td 
+                                    span(data-label="UserId") #{room.UserId}
+                                td
+                                    if user && user.id === room.UserId || user && user.RoleID === 1
+                                        form(action="/room/" + room.id + "/delete", method="POST")
+                                            button(type="submit").btn.btn-primary Delete
+                                td 
+                                    form(action="/room/" + room.id + "/purchase", method="POST")
+                                            button(type="submit").btn.btn-primary Purchase
+        include ../common/footer.pug
+        +footer()
+        script(src='javascripts/rooms.js')

@@ -1,0 +1,57 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Rooms")
+    - var test = sortffsdf;
+    body
+        header
+            include ../common/navbar.pug
+            +navbar(user)
+        .container
+            .row.align-items-center 
+                h1 Rooms
+                .container
+                    .row
+                        .col-sm
+                            .form-floating.mb-3
+                                input(name="search" type="text" placeholder="Search").search-input.form-control.mb-3
+                                label(for="search") Search
+                        .col-sm
+                            a(href="/addroom/").btn.btn-secondary.me-3 Add Room
+                                img(src="/images/plus-circle.svg" width="36" height="36").add-icon.ms-3
+                            button(type="button").btn.btn-secondary.sort-price-btn.me-3 Sort by Price
+                .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                    table.table
+                        thead
+                            tr
+                                th(scope="col") Type
+                                th(scope="col") Location
+                                th(scope="col") Size
+                                th(scope="col") Amenities
+                                th(scope="col") Price
+                                th(scope="col") Payment Frequency
+                        tbody(id="room-table-body")
+                            each room in rooms
+                                tr(class='room-row', id=room.id)
+                                    td 
+                                        span(data-label="type") #{room.type}
+                                    td
+                                        span(data-label="location")
+                                            | #{room.country}, #{room.city}, #{room.address}, Floor #{room.floor_number}, Room #{room.door_number}
+                                    td
+                                        span(data-label="size") #{room.size} m²
+                                    td
+                                        span(data-label="amenities")
+                                            each amenity in room.amenities
+                                                p #{amenity.name}
+                                    td 
+                                        span(data-label="price") #{room.Price.price}
+                                    td 
+                                        span(data-label="price-freq") #{room.Price.frequency}
+                                    td
+                                        a(href="/room/" + room.id) Details
+        include ../common/footer.pug
+        +footer()
+        script.
+            var roomsData = !{JSON.stringify(rooms)};
+        script(src='/javascripts/sortRooms.js')

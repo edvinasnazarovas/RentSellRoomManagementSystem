@@ -1,0 +1,31 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Users")
+    body
+        header
+            include ../common/navbar.pug
+            +navbar()
+            .container
+                .row.align-items-center 
+                    .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                        h1 Rooms
+                        table.table
+                            thead
+                            tr
+                                th(scope="col") Email
+                                th(scope="col") Edit 
+                                th(scope="col") Delete
+                            tr
+                            tbody
+                              tr(id=room.id)
+                              td
+                                  span #{room.type}
+                              td
+                                  a(href="/user/" + room.id + "/edit") Edit
+                              td
+                                  form(action="/user/" + room.id + "/delete", method="POST")
+                                  button(type="submit").btn.btn-primary Delete
+        include ../common/footer.pug
+        +footer()
+        script(src='javascripts/rooms.js')

@@ -1,0 +1,65 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Rooms")
+    body
+        header
+            include ../common/navbar.pug
+            +navbar(user)
+        .container
+            .row.align-items-center 
+                .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                    h1 Add Room
+                    form(action="/rooms", method="POST") 
+                        input(name="UserId" type="hidden" placeholder="UserId" value=user.id).form-control.mb-3
+                        .form-floating.mb-3
+                            input(name="size" type="number" placeholder="Enter room size").form-control.mb-3
+                            label(for="size") Enter room size
+                        .form-floating.mb-3
+                            input(name="country" type="text" placeholder="Enter Country").form-control.mb-3
+                            label(for="country") Enter Country
+                        .form-floating.mb-3
+                            input(name="city" type="text" placeholder="city").form-control.mb-3
+                            label(for="city") Enter City
+                        .form-floating.mb-3
+                            input(name="address" type="text" placeholder="address").form-control.mb-3
+                            label(for="address") Enter Address
+                        .form-floating.mb-3
+                            input(name="floor_number" type="text" placeholder="floor_number").form-control.mb-3
+                            label(for="floor_number") Enter Floor Number
+                        .form-floating.mb-3
+                            input(name="door_number" type="text" placeholder="door_number").form-control.mb-3
+                            label(for="door_number") Enter Door Number
+                        .form-group
+                            label(for="amenities") Amenities
+                            #amenities-container
+                                .input-group.mb-3
+                                    input(name="amenities[]" type="text" placeholder="Enter amenity" class="form-control")
+                                    button(type="button", class="btn btn-outline-secondary remove-btn") Remove
+                            button(type="button", class="btn btn-outline-primary add-amenity-btn") Add Amenity
+                        .form-group
+                            label(for="price") Price
+                            input(name="price" type="text" placeholder="Enter price" class="form-control")
+                            
+                            .form-group
+                            label(for="frequency") Payment Frequency
+                            select(name="frequency" class="form-control")
+                                option(value="Daily") Per Day
+                                option(value="Weekly") Per Week
+                                option(value="Monthly") Per Month
+                        .form-floating.mb-3 
+                            input(name="description" type="text" placeholder="Enter description").form-control.mb-3
+                            label(for="description") Enter description
+                        input(name="type" type="hidden" placeholder="Select room type").form-control.mb-3
+                        .dropdown
+                            button(name="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false").btn.btn-secondary.dropdown-toggle.mb-5 Room Type
+                            .dropdown-menu
+                                button.dropdown-item(name="room_type_button" type="button" value='Single') Single
+                                button.dropdown-item(name="room_type_button" type="button" value='Double') Double
+                                button.dropdown-item(name="room_type_button" type="button" value='Apartament') Apartament
+                                button.dropdown-item(name="room_type_button" type="button" value='Other') Other
+                        .input-group-append
+                            button(type="submit").btn.btn-primary Add Room
+        include ../common/footer.pug
+        +footer()
+        script(src='/javascripts/rooms.js')

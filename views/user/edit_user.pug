@@ -1,0 +1,39 @@
+doctype html 
+html(lang='en')
+    include ../common/head.pug
+    +head("Edit User")
+    body
+        header
+            include ../common/navbar.pug
+            +navbar(user)
+            .container 
+                .row
+                    .col-md-6
+                        form(action="/user/"+user.id+"/edit", method="POST")
+                            .input-group.mb-3
+                                input(name="user_email", type="email", placeholder="Enter your email address", value=user.email).form-control
+                            .input-group.mb-3
+                                input(name="first_name", type="first_name", placeholder="Enter your first name", value=user.first_name).form-control
+                            .input-group.mb-3
+                                input(name="last_name", type="last_name", placeholder="Enter your last name", value=user.last_name).form-control
+                            .input-group.mb-3
+                                input(name="phone_number", type="phone_number", placeholder="Enter your phone number", value=user.phone_number).form-control
+                            .input-group.mb-3
+                                input(name="country", type="country", placeholder="Enter your country", value=user.country).form-control
+                            .input-group.mb-3
+                                input(name="city", type="city", placeholder="Enter your city", value=user.city).form-control
+                            .input-group.mb-3
+                                input(name="address", type="address", placeholder="Enter your address", value=user.address).form-control
+                            .input-group.mb-3
+                                input(name="preferred_pay_method", type="hidden", placeholder="Enter your contact details").form-control.mb-3
+                                .dropdown
+                                    button(name="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false").btn.btn-secondary.dropdown-toggle.mb-5 Preferred Payment Method
+                                    .dropdown-menu
+                                        button.dropdown-item(name="pay_method_button" type="button" value='Credit Card') Credit Card
+                                        button.dropdown-item(name="pay_method_button" type="button" value='Cash') Cash
+                                        button.dropdown-item(name="pay_method_button" type="button" value='Online Banking') Online Banking
+                            .input-group-append
+                                        button(type="submit").btn.btn-primary Save
+        include ../common/footer.pug
+        +footer()
+        script(src='/javascripts/users.js')

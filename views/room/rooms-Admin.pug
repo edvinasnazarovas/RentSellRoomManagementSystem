@@ -1,0 +1,55 @@
+doctype html
+html(lang='en')
+    include ../common/head.pug
+    +head("Rooms")
+    body
+        header
+            include ../common/navbar-Admin.pug
+            +navbar(user)
+        .container
+            .row.align-items-center 
+                .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+                    h1 Rooms Admin
+                    a(href="/addroom/") Add Room
+                    table.table
+                        thead
+                            tr
+                                th(scope="col") Type
+                                th(scope="col") Location
+                                th(scope="col") Size
+                                th(scope="col") Amenities
+                                th(scope="col") Description
+                                th(scope="col") Price
+                                th(scope="col") Payment frequency 
+                                th(scope="col") Created at
+                                th(scope="col") Last updated
+                                th(scope="col") Owner
+                        tr
+                            tbody
+                                for room in rooms
+                                    tr(id=room.id)
+                                        td 
+                                            span #{room.type}
+                                        td 
+                                            span #{room.location}
+                                        td
+                                            span #{room.size}
+                                        td
+                                            span #{room.amenities}
+                                        td 
+                                            span #{room.description}
+                                        td 
+                                            span #{room.price}
+                                        td 
+                                            span #{room.price_freq}
+                                        td 
+                                            span #{room.createdAt}
+                                        td 
+                                            span #{room.updatedAt}
+                                        td 
+                                            span #{room.UserId}
+                                        td
+                                            a(href="/room/" + room.id) Details
+        include ../common/footer.pug
+        +footer()
+        script(src='/javascripts/rooms.js')
